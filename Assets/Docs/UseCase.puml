@@ -1,0 +1,37 @@
+@startuml 
+left to right direction 
+actor player
+actor Friendlyanimal
+actor Hostileanimal
+ rectangle Friendly_animal{   
+    usecase "Moving burning calories" as Randommove
+    usecase "Hungry searching for grass" as Hungry
+ }
+ rectangle Grass{
+    usecase "grow" as grow
+}
+
+Grass <. Hungry
+Hostile_animal --> Friendly_animal 
+rectangle Hostile_animal{
+    usecase "attack" as attack
+    usecase "Chase" as chase
+    usecase "eat Friendly Animal" as eat
+    usecase "die out of hunger" as die_out_of_hunger
+    usecase "grow big" as grow_big
+}
+
+    
+player -down-> attack
+player -down-> chase
+player -down-> eat
+
+Friendlyanimal --> Randommove
+Friendlyanimal --> Hungry
+
+Hostileanimal -up-> grow_big
+Hostileanimal -up-> attack
+Hostileanimal -up-> chase
+Hostileanimal -up-> eat
+Hostileanimal -up-> die_out_of_hunger
+@enduml
