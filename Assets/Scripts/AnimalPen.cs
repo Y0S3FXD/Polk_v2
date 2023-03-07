@@ -83,7 +83,20 @@ public class AnimalPen : MonoBehaviour
             animal.Pen = this;
         }
     }
+    public void SpawnHostile(List<GameObject> anims)
+    {
+        for (int i = 0; i < anims.Count; i++)
+        {
+            Vector3 pos = transform.position;
+            pos.y += 2;
+            GameObject go = Instantiate(anims[i], pos, Quaternion.identity);
+            go.transform.SetParent(transform);
 
+            HostileAnimal animal = go.GetComponent<HostileAnimal>();
+            Animals.Add(animal);
+            animal.Pen = this;
+        }
+    }
     public void SpawnAnimals(HashSet<GameObject> animals)
     {
         foreach (GameObject anim in animals)

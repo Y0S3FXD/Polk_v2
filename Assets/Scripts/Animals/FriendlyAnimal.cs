@@ -7,6 +7,9 @@ namespace Lesson_6.Animals
     public abstract class FriendlyAnimal : Animal, IFriendlyAnimal
     {
         public AnimalPen Pen;
+        public void Die(){
+            Destroy(gameObject);
+        }
 
         public virtual void OnMouseDown()
         {

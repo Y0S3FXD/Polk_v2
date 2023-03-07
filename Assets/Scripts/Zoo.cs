@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using System.Collections;
 using System.Collections.Generic;
 using Lesson_6;
@@ -37,57 +38,22 @@ public class Zoo : MonoBehaviour
         //Spawn animals in the pen using different methods
         switch (counter)
         {
-            //Spawn 5 pigs using a dictionary
             case 0:
-                Dictionary<GameObject, int> spawns = new Dictionary<GameObject, int>();
-                spawns.Add(AnimalPrefabs[0], 5);
-                pen.SpawnAnimals(spawns);
-                break;
-
-            //Spawn 50 cats using a 2D array
-            case 1:
-                int[][] matrix = new int[10][];
-                for (int i = 0; i < matrix.Length; i++)
+              List<GameObject> wolfs = new List<GameObject>();
+                for (int i = 0; i < 10; i++)
                 {
-                    matrix[i] = new int[5];
-                    for (int j = 0; j < matrix[i].Length; j++)
-                    {
-                        matrix[i][j] = 1;
-                    }
+                    wolfs.Add(AnimalPrefabs[2]);
+                    pen.SpawnHostile(wolfs);
                 }
-                pen.SpawnAnimals(AnimalPrefabs[1], matrix);
-                break;
-
-            //Spawn 4 pigs using a 2D array
-            case 2:
-                int[,] matrixs = new int[2, 2];
-                for (int i = 0; i < matrixs.GetLength(0); i++)
+                List<GameObject> Friendanimal = new List<GameObject>();
+                for (int i = 0; i < 5; i++)
                 {
-                    for (int j = 0; j < matrixs.GetLength(1); j++)
-                    {
-                        matrixs[i, j] = 1;
-                    }
+                    Friendanimal.Add(AnimalPrefabs[1]);
+                    Friendanimal.Add(AnimalPrefabs[0]);
+                    pen.SpawnAnimals(Friendanimal);
                 }
-                pen.SpawnAnimals(AnimalPrefabs[0], matrixs);
+                pen.SpawnHostile(wolfs);
                 break;
-
-            //Spawn 4 pigs using a list
-            case 3:
-                List<GameObject> anims = new List<GameObject>();
-                anims.Add(AnimalPrefabs[0]);
-                anims.Add(AnimalPrefabs[0]);
-                anims.Add(AnimalPrefabs[0]);
-                anims.Add(AnimalPrefabs[0]);
-                pen.SpawnAnimals(anims);
-                break;
-            //Spawn 2 pigs using a hashset
-            case 4:
-                HashSet<GameObject> set = new HashSet<GameObject>();
-                set.Add(AnimalPrefabs[0]);
-                set.Add(AnimalPrefabs[0]);
-                pen.SpawnAnimals(set);
-                break;
-
             default:
                 break;
         }
