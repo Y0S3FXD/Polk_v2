@@ -8,7 +8,35 @@ using UnityEngine;
 public class AnimalPen : MonoBehaviour
 {
     public List<Animal> Animals = new List<Animal>();
+     public void SpawnHostile(List<GameObject> anims)
+    {
+        for (int i = 0; i < 1; i++)
+        {
+            Vector3 pos = transform.position;
+            pos.y += 2;
+            GameObject go = Instantiate(anims[i], pos, Quaternion.identity);
+            go.transform.SetParent(transform);
 
+            HostileAnimal animal = go.GetComponent<HostileAnimal>();
+            Animals.Add(animal);
+            animal.Pen = this;
+        }
+    }
+    public void SpawnAnimals(List<GameObject> anims)
+    {
+        for (int i = 0; i < anims.Count; i++)
+        {
+            Vector3 pos = transform.position;
+            pos.y += 2;
+            GameObject go = Instantiate(anims[i], pos, Quaternion.identity);
+            go.transform.SetParent(transform);
+
+            FriendlyAnimal animal = go.GetComponent<FriendlyAnimal>();
+            Animals.Add(animal);
+            animal.Pen = this;
+        }
+    }
+/*
     public void SpawnAnimals(Dictionary<GameObject, int> spawns)
     {
         foreach (KeyValuePair<GameObject, int> kv in spawns)
@@ -83,20 +111,7 @@ public class AnimalPen : MonoBehaviour
             animal.Pen = this;
         }
     }
-    public void SpawnHostile(List<GameObject> anims)
-    {
-        for (int i = 0; i < anims.Count; i++)
-        {
-            Vector3 pos = transform.position;
-            pos.y += 2;
-            GameObject go = Instantiate(anims[i], pos, Quaternion.identity);
-            go.transform.SetParent(transform);
-
-            HostileAnimal animal = go.GetComponent<HostileAnimal>();
-            Animals.Add(animal);
-            animal.Pen = this;
-        }
-    }
+   
     public void SpawnAnimals(HashSet<GameObject> animals)
     {
         foreach (GameObject anim in animals)
@@ -111,4 +126,5 @@ public class AnimalPen : MonoBehaviour
             animal.Pen = this;
         }
     }
+     */
 }

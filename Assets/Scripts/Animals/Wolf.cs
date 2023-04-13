@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +9,16 @@ namespace Lesson_6.Animals
 
     public class Wolf : HostileAnimal
     {
+        public Transform targetobject;
+        private Vector3 initialoffset;
+        public void Start(){
+            speed = 10.0f;
+        }
         //control movement with arrows
+        
         protected void Update()
         {
+            
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
@@ -32,7 +41,11 @@ namespace Lesson_6.Animals
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
         }
-
+//make Main camera follow the wolf
+        protected void LateUpdate()
+        {
+            Camera.main.transform.position = transform.position + initialoffset;
+        }
 
         //attack animals in pen
         protected void Attack()

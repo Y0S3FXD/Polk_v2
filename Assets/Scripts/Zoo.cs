@@ -18,7 +18,7 @@ public class Zoo : MonoBehaviour
         Pens = new List<AnimalPen>();
         AllAnimals = new List<Animal>();
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 1; i++)
         {
             AnimalPen pen = Spawner(i);
             AllAnimals.AddRange(pen.Animals);
@@ -40,7 +40,7 @@ public class Zoo : MonoBehaviour
         {
             case 0:
               List<GameObject> wolfs = new List<GameObject>();
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     wolfs.Add(AnimalPrefabs[2]);
                     pen.SpawnHostile(wolfs);
