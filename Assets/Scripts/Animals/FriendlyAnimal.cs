@@ -8,12 +8,35 @@ namespace Lesson_6.Animals
     {
         public AnimalPen Pen;
         public void Die(){
+            Pen.Animals.Remove(this);
             Destroy(gameObject);
+            
         }
-
-        public virtual void OnMouseDown()
+void OnCollisionEnter(Collision col)
         {
-            GetComponent<MeshRenderer>().material.color = Color.green;
+            if (col.gameObject.tag == "Pig")
+            {
+                //destroy the object
+                Destroy(col.gameObject);
+            }
+            if (col.gameObject.tag == "Cat")
+            {
+                //destroy the object
+                Destroy(col.gameObject);
+            }
+            if (col.gameObject.tag == "Sheep")
+            {
+                //destroy the object
+                Destroy(col.gameObject);
+            }
+        }
+// If wolf hits the cat, the cat will die
+
+
+        public void OnMouseDown()
+        {
+
+            GetComponent<MeshRenderer>().material.color = Color.red;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace Lesson_6.Animals
 {
     public abstract class HostileAnimal : Animal, IHostileAnimal
     {
-public AnimalPen Pen;
+        public AnimalPen Pen;
     }
+    
 }

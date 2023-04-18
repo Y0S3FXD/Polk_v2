@@ -36,6 +36,18 @@ public class AnimalPen : MonoBehaviour
             animal.Pen = this;
         }
     }
+     void OnCollisionEnter(Collision col)
+        {
+            
+            if (col.gameObject.name == "Cat")
+            {
+UnityEngine.Debug.Log("some texssst");
+
+                //destroy the object
+                Destroy(col.gameObject);
+            }
+          
+        }
 /*
     public void SpawnAnimals(Dictionary<GameObject, int> spawns)
     {

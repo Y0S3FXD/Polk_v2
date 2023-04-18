@@ -1,3 +1,6 @@
+using System.Linq.Expressions;
+using System.ComponentModel;
+using System.Transactions;
 using System.Runtime.CompilerServices;
 using System;
 using System.Collections;
@@ -9,16 +12,27 @@ namespace Lesson_6.Animals
 
     public class Wolf : HostileAnimal
     {
-        public Transform targetobject;
         private Vector3 initialoffset;
-        public void Start(){
+        private Vector3 cameraposition;
+        public void Start()
+        {
             speed = 10.0f;
         }
+        //make Main camera follow the wolf as third player game
+        protected void LateUpdate()
+        {
+
+            initialoffset = new Vector3(0, 10, -10);
+            cameraposition = transform.position + initialoffset;
+            Camera.main.transform.position = cameraposition;
+            Camera.main.transform.LookAt(transform.position);
+        }
         //control movement with arrows
-        
+        //oncolission with wolf and the friendly animal kill the friendly animal.
+
         protected void Update()
         {
-            
+
 
             if (Input.GetKey(KeyCode.UpArrow))
             {
@@ -40,30 +54,38 @@ namespace Lesson_6.Animals
                 CurrentState = AnimalState.MOVING;
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
+            else
+            {
+                CurrentState = AnimalState.IDLE;
+            }
+            // The currents state is attacking when i press space
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                CurrentState = AnimalState.ATTACKING;
+                UnityEngine.Debug.Log("i press space");
+
+            }
+            else
+            {
+                CurrentState = AnimalState.IDLE;
+            }
+
         }
-//make Main camera follow the wolf
-        protected void LateUpdate()
+        //when wolf touch an friendly animal remove the friendly animal from the pen and kill it
+        void OnCollisionEnter(Collision col)
         {
-            Camera.main.transform.position = transform.position + initialoffset;
+            
+            if (col.gameObject.name == "Cat")
+            {
+UnityEngine.Debug.Log("some text");
+
+                //destroy the object
+                Destroy(col.gameObject);
+            }
+          
         }
 
-        //attack animals in pen
-        protected void Attack()
-        {
-            if (CurrentState == AnimalState.ATTACKING)
-            {
-                if (Pen.Animals.Count > 0)
-                {
-                    FriendlyAnimal animal = (FriendlyAnimal)Pen.Animals[0];
-                    animal.Die();
-                    Pen.Animals.Remove(animal);
-                }
-                else
-                {
-                    CurrentState = AnimalState.IDLE;
-                }
-            }
-        }
+
 
     }
 }

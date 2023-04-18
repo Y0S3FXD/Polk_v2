@@ -1,7 +1,8 @@
+using System.Diagnostics;
+using System.Net.Security;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace Lesson_6.Animals
 {
     public class Cat : FriendlyAnimal
@@ -15,11 +16,11 @@ namespace Lesson_6.Animals
             _angle = Random.Range(0f, 360f);
         }
 
-        public override void OnMouseDown()
+        // If wolf hits the cat, the cat will die
+        public void OnMouseDown()
         {
-            GetComponent<MeshRenderer>().material.color = Color.blue;
+            Die();
         }
-
         protected void Update()
         {
             // Calculate the position of the orbit based on the _startposition and the current angle
@@ -34,6 +35,20 @@ namespace Lesson_6.Animals
 
             // Increase the angle based on the speed
             _angle += speed * Time.deltaTime;
+        }
+
+
+        //on coliision with wolf destroy the cat
+        void OnCollisionEnter(Collision col)
+        {
+            Destroy(col.gameObject);
+            if (col.gameObject.name == "cat")
+            {
+                UnityEngine.Debug.Log("some text1111");
+
+                //destroy the object
+                Destroy(col.gameObject);
+            }
         }
     }
 }

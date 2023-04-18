@@ -40,6 +40,18 @@ namespace Lesson_6
                 Vector3 dragLocation = new Vector3(worldPoint.x, SelectedAnimal.transform.position.y, worldPoint.z);
                 SelectedAnimal.transform.position = dragLocation;
             }
+            //when the wolf collides with the cat, the cat dies
+            void OnCollisionEnter(Collision col)
+            {
+                                UnityEngine.Debug.Log("some text");
+
+                if (col.gameObject.tag == "cat")
+                {
+
+                    //destroy the object
+                    Destroy(col.gameObject);
+                }
+            }
         }
     }
 }

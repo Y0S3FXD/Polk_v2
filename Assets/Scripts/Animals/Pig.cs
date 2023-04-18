@@ -37,6 +37,15 @@ namespace Lesson_6.Animals
             }
             Busy = false;
         }
+        void OnCollisionEnter(Collision col)
+        {
+            if (col.gameObject.tag == "cat")
+            {
+
+                //destroy the object
+                Destroy(col.gameObject);
+            }
+        }
 
     }
 }

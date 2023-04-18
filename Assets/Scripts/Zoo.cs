@@ -40,11 +40,9 @@ public class Zoo : MonoBehaviour
         {
             case 0:
               List<GameObject> wolfs = new List<GameObject>();
-                for (int i = 0; i < 1; i++)
-                {
+                
                     wolfs.Add(AnimalPrefabs[2]);
-                    pen.SpawnHostile(wolfs);
-                }
+                
                 List<GameObject> Friendanimal = new List<GameObject>();
                 for (int i = 0; i < 5; i++)
                 {
